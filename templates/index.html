@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Vue thingy</title>
+    <!-- cdn import of vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> 
+</head>
+<body>
+    <div id="app">
+        <!-- Vue.js rendering and event handling-->
+        <button @click="addToCount">
+            Click for vueCount to be ((vueCount+1))
+        </button>  
+        <h1>((vueCount))</h1>
+
+        <!-- Flask rendering -->     
+        <a href="{{url_for('increment', flask_count = flask_count + 1)}}">
+            Make Flask Count {{flask_count + 1}}
+        </a> 
+        <h1>{{flask_count}}</h1>
+    </div>
+    
+</body>
+<!-- need this after the html always -->
+<script>
+    new Vue({
+        el: '#app', // points to the root div by id of app 
+        delimiters: ['((', '))'], // tells vue how we want it to identify vue variables
+        data(){
+            return {
+                vueCount: 0, 
+            }
+        }, 
+        methods:{
+            addToCount(){
+                this.vueCount++; 
+            }
+        }
+
+    })
+</script>
+</html>
